@@ -16,10 +16,13 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready() -> None:
     print(f"{client.user} Online!")
+    await client.change_presence(activity=discord.Streaming(name="이모티콘", url="url"))
 
 
 @client.event
 async def on_message(message: discord.Message) -> None:
+    if message.author.bot:
+        return
     if not message.guild:
         return
 
